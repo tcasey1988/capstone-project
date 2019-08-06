@@ -1,4 +1,4 @@
-package com.capstone.capstoneproject;
+package com.capstone.capstoneproject.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,15 +11,15 @@ public class User {
 
     @GeneratedValue
     @Id
-    Integer id;
+    private int id;
 
     @Column(unique = true)
     @NotNull
-    String username;
+    private String username;
 
     @Column
     @NotNull
-    String password;
+    private String password;
 
     public User() {
     }
@@ -28,14 +28,6 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getUsername() {
