@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: navigation"></nav>
+
+<!-- form for inputting user data when creating new procedures -->
+<form method="post" th:object="${doc}">
+    <!-- user enters the title -->
+    <div>
+        <label for="title-field">Title</label>
+        <input id="title-field" type="text" th:field="*{title}" />
+        <span th:errors="*{title}" class="error"></span>
+    </div>
+
+    <!-- user enters their procedure -->
+    <div>
+        <label for="body-field">Body</label>
+        <br>
+        <!--<input id="body-field" type="text" th:field="*{body}" />-->
+        <textarea id="body-field" rows="3" th:field="*{body}"></textarea>
+        <span th:errors="*{body}" class="error"></span>
+    </div>
+    <!-- process form -->
+    <input type="submit" value="Create" />
+</form>
+
+</body>
+</html>

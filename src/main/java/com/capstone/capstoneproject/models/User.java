@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class User {
@@ -15,10 +16,12 @@ public class User {
 
     @Column(unique = true)
     @NotNull
+    @Size(min=3,max=15)
     private String username;
 
     @Column
     @NotNull
+    @Size(min=6)
     private String password;
 
     public User() {
