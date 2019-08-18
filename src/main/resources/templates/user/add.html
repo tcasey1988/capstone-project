@@ -10,12 +10,14 @@
     <div>
         <label for="name-field">Username</label>
         <input id="name-field" type="text" th:field="*{username}" />
+        <span th:errors="*{username}" class="error"></span>
     </div>
 
     <!-- user enters their password -->
     <div>
         <label for="pass-field">Password</label>
-        <input id="pass-field" type="text" th:field="*{password}" />
+        <input id="pass-field" type="password" th:field="*{password}" />
+        <span th:errors="*{password}" class="error"></span>
     </div>
     <!-- process form -->
     <input type="submit" value="Create User" />

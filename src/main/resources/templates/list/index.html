@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head th:replace="fragments :: head"></head>
-<!-- the page that is returned after the user creates an account -->
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 
-<h1 th:text="${title}">Default title</h1>
-<h2 th:text="'Hello ' + ${user.username}"></h2>
+<ul>
+    <li th:each="document : ${documents}">
+        <a th:href="'/document/view/' + ${document.id}" th:text="${document.title}"></a>
+    </li>
+</ul>
 
 </body>
 </html>
