@@ -2,13 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head th:replace="fragments :: head"></head>
-<!-- the page that is returned after a procedure is generated -->
 <body class="container">
 <nav th:replace="fragments :: navigation"></nav>
 
 <ul>
-    <li th:each="doc: ${docs}">
-        <a th:href="'/doc/view/' + ${doc.id}" th:text="${doc.title}"></a>
+    <li th:each="document : ${documents}">
+        <a th:href="'/document/view/' + ${document.id}" th:text="${document.title}"></a>
     </li>
 </ul>
 

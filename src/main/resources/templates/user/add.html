@@ -16,7 +16,7 @@
     <!-- user enters their password -->
     <div>
         <label for="pass-field">Password</label>
-        <input id="pass-field" type="text" th:field="*{password}" />
+        <input id="pass-field" type="password" th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
     </div>
     <!-- process form -->

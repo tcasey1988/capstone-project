@@ -25,6 +25,7 @@ public class UserController {
     @RequestMapping(value = "add")
     public String displayAddUser(Model model) {
         model.addAttribute(new User());
+        model.addAttribute("title","Add User");
         return "user/add";
     }
 
@@ -33,10 +34,12 @@ public class UserController {
     public String processAddUser(Model model, @ModelAttribute @Valid User user, Errors errors) {
         if(errors.hasErrors()){
             model.addAttribute(user);
+            model.addAttribute("title","Add User");
             return "user/add";
         }
         model.addAttribute(user);
         userDao.save(user);
+        model.addAttribute("title","Add User");
         return "user/index";
     }
 }

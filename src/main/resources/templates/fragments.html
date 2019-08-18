@@ -4,20 +4,16 @@
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}">Default title</title>
-    <!--<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>-->
-    <style>
-        body {font-family: sans-serif;}
-        nav {margin-bottom: 20px;}
-        .error {color: #FF0000;}
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+
 </head>
 
 <body>
 
 <nav th:fragment="navigation">
-    <a href="/list/all">Home</a>
-    <a href="/user/add">User</a>
-    <a href="/doc/add">Create</a>
+    <a href="/list/all">Home</a> |
+    <a href="/user/add">User</a> |
+    <a href="/document/add">Create</a>
 </nav>
 
 </body>

@@ -8,29 +8,29 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Doc {
+public class Document {
 
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private int id;
 
-    @Column(unique = true)
+    @Column
     @NotNull
-    @Size(min=3)
+    @Size(min=6, max=20)
     private String title;
 
     @Column
     @NotNull
-    @Size(min=3)
+    @Size(min=6, max=500)
     private String body;
 
-    public Doc(){}
-
-    public Doc(Integer id, String title, String body) {
+    public Document(Integer id, String title, String body){
         this.id = id;
         this.title = title;
         this.body = body;
     }
+
+    public Document(){}
 
     public String getTitle() {
         return title;

@@ -10,8 +10,8 @@ import javax.validation.constraints.Size;
 @Entity
 public class User {
 
-    @GeneratedValue
     @Id
+    @GeneratedValue
     private int id;
 
     @Column(unique = true)
@@ -21,7 +21,7 @@ public class User {
 
     @Column
     @NotNull
-    @Size(min=6)
+    @Size(min=6, max=30)
     private String password;
 
     public User() {
@@ -48,4 +48,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public int getId() { return id; }
 }
