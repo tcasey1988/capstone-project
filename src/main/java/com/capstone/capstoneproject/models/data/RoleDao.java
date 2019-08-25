@@ -1,10 +1,10 @@
 package com.capstone.capstoneproject.models.data;
 
-import com.capstone.capstoneproject.models.User;
+import com.capstone.capstoneproject.models.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserDao extends CrudRepository<User, Long> {
-    User findByEmail(String email);
+public interface RoleDao extends CrudRepository<Role, Integer> {
+    Role findByRole(String role);
 }

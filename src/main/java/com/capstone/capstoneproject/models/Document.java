@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,21 +14,16 @@ public class Document {
     @GeneratedValue
     private int id;
 
-    @Column
-    @NotNull
-    @Size(min=6, max=20)
+    @Column(name = "title")
+    @NotEmpty(message = "Please provide a title")
+    @Size(min=6, message = "*Title must be at least 6 characters")
     private String title;
 
-    @Column
-    @NotNull
-    @Size(min=6, max=500)
+    @Column(name = "body")
+    @NotEmpty(message = "Please enter information")
+    @Size(min=6, message = "*Document is too short")
     private String body;
 
-    public Document(Integer id, String title, String body){
-        this.id = id;
-        this.title = title;
-        this.body = body;
-    }
 
     public Document(){}
 
