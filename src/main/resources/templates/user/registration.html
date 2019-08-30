@@ -11,12 +11,12 @@
     <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post">
         <h2>Registration Form</h2>
         <div>
+            <input type="text" th:field="*{name}" placeholder="Name"/>
             <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
-                        <input type="text" th:field="*{name}" placeholder="Name"/>
         </div>
         <div>
-            <label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></label>
             <input type="text" th:field="*{lastName}" placeholder="Last Name" />
+            <label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></label>
         </div>
 
         <div>
@@ -30,7 +30,7 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-primary btn-block">Register User</button>
+            <button type="submit">Register User</button>
         </div>
 
         <span th:utext="${successMessage}"></span>

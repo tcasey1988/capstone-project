@@ -5,20 +5,18 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <!-- form for inputting user data when creating new procedures -->
-<form method="post" th:object="${document}">
-    <!-- user enters the title -->
-    <div>
+<form method="post" th:object="${document}" style="width: 500px; margin: auto;">
+    <div class="form-group">
         <label for="title-field">Title</label>
+        <br>
         <input id="title-field" type="text" th:field="*{title}" />
         <span th:errors="*{title}" class="error"></span>
     </div>
-
-    <!-- user enters their procedure -->
-    <div>
+    <div class="form-group">
         <label for="body-field">Body</label>
         <br>
-        <textarea id="body-field" rows="6" th:field="*{body}"></textarea>
-        <span th:errors="*{body}" class="error"></span>
+        <textarea id="body-field" rows="15" cols="40" th:field="*{body}"></textarea>
+        <span th:errors="*{body}"></span>
     </div>
     <input type="submit" value="Create" />
 </form>
