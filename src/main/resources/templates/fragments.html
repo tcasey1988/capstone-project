@@ -5,16 +5,27 @@
     <meta charset="UTF-8"/>
     <title th:text="${title}">Default title</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 
 <body>
 
-<nav th:fragment="navigation">
-    <a href="/list/all">Home</a> |
-    <a href="/registration">User</a> |
-    <a href="/document/add">Create</a>
+<nav th:fragment="navigation" class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a href="/list/all">List docs</a>|
+            </li>
+            <li class="nav-item">
+                <a href="/document/add">Create doc</a>
+            </li>
+        </ul>
+    </div>
 </nav>
+
+
+<footer th:fragment="footer">&copy; 2019</footer>
 
 </body>
 </html>

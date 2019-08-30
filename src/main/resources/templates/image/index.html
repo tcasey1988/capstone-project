@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+<body>
+<p th:unless="${images}">No images</p>
+<ul>
+    <li th:each="image : ${images}">
+        <img th:src="@{'/images/' + ${image.name}}" />
+    </li>
+</ul>
+<form method="post" enctype="multipart/form-data" action="/image"/>
+<p><input type="file" name="file" /></p>
+<p><input type="submit" value="Upload" /></p>
+</body>
+</html>
