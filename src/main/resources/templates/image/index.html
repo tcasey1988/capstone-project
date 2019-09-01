@@ -2,15 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head th:replace="fragments :: head"></head>
+
 <body>
-<p th:unless="${images}">No images</p>
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${images} and ${images.size()}">no images</p>
+
 <ul>
     <li th:each="image : ${images}">
         <img th:src="@{'/images/' + ${image.name}}" />
     </li>
 </ul>
+
 <form method="post" enctype="multipart/form-data" action="/image"/>
 <p><input type="file" name="file" /></p>
 <p><input type="submit" value="Upload" /></p>
+
+<footer th:replace="fragments :: footer"></footer>
+
+<div th:replace="fragments :: scripts"></div>
+
 </body>
 </html>

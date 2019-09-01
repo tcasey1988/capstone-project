@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
 <head th:replace="fragments :: head"></head>
+
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 
-<!-- form for inputting user data when creating new procedures -->
-<form method="post" th:object="${document}" style="width: 500px; margin: auto;">
+<form method="post" th:object="${document}" class="form-class">
     <div class="form-group">
         <label for="title-field">Title</label>
         <br>
         <input id="title-field" type="text" th:field="*{title}" />
-        <span th:errors="*{title}" class="error"></span>
+        <label th:errors="*{title}" class="error"></label>
     </div>
+
     <div class="form-group">
-        <label for="body-field">Body</label>
-        <br>
-        <textarea id="body-field" rows="15" cols="40" th:field="*{body}"></textarea>
-        <span th:errors="*{body}"></span>
+        <input name="body" type="hidden" th:field="*{body}"/>
+        <div id="editor-container"></div>
     </div>
+
     <input type="submit" value="Create" />
 </form>
+
+<footer th:replace="fragments :: footer"></footer>
+
+<div th:replace="fragments :: scripts"></div>
+
+<script>
+var quill = new Quill('#editor-container', {
+  modules: {
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      ['image']
+    ]
+  },
+  theme: 'snow'
+});
+
+var form = document.querySelector('form');
+form.onsubmit = function() {
+  var about = document.querySelector('input[name=body]');
+  about.value = quill.root.innerHTML;
+};
+</script>
 
 </body>
 </html>

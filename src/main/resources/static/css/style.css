@@ -1,7 +1,13 @@
-.error {color: #FF0000;}
+.error {color: #FF1C19;}
 
-.form-class{
+.form-class, footer{
 width: 500px;
 margin: auto;
-
 }
+
+#editor-container {
+  height: 375px;
+}
+
+
+

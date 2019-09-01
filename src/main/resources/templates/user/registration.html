@@ -2,42 +2,41 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head th:replace="fragments :: head"></head>
+
 <body>
-<form th:action="@{/}" method="get">
-    <button type="Submit">Go To Login Page</button>
-</form>
-
 <div>
-    <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post">
+    <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-class">
         <h2>Registration Form</h2>
-        <div>
-            <input type="text" th:field="*{name}" placeholder="Name"/>
-            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
-        </div>
-        <div>
-            <input type="text" th:field="*{lastName}" placeholder="Last Name" />
-            <label	th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></label>
+
+        <div class="form-group">
+            <input type="text" th:field="*{name}" placeholder="Name" class="form-control"/>
+            <label th:errors="*{name}" class="error"></label>
         </div>
 
-        <div>
-            <input type="text" th:field="*{email}" placeholder="Email"/>
-            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+        <div class="form-group">
+            <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control"/>
+            <label th:errors="*{lastName}" class="error"></label>
         </div>
 
-        <div>
-            <input type="password" th:field="*{password}" placeholder="Password" />
-            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
+        <div class="form-group">
+            <input type="text" th:field="*{email}" placeholder="Email" class="form-control"/>
+            <label th:errors="*{email}" class="error"></label>
         </div>
 
-        <div>
-            <button type="submit">Register User</button>
+        <div class="form-group">
+            <input type="password" th:field="*{password}" placeholder="Password" class="form-control"/>
+            <label th:errors="*{password}" class="error"></label>
         </div>
 
+        <button type="submit">Register User</button>
         <span th:utext="${successMessage}"></span>
-
+        <a href="/login">User login</a>
     </form>
 </div>
 
+<footer th:replace="fragments :: footer"></footer>
+
+<div th:replace="fragments :: scripts"></div>
 
 </body>
 </html>

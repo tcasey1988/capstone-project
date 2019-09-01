@@ -39,7 +39,7 @@ public class DocumentController {
         model.addAttribute(document);
         documentDao.save(document);
         model.addAttribute("title","Add Procedure");
-        return "document/index";
+        return "redirect:/document/view/" + document.getId();
     }
 
     /*view a form by clicking a link on the home page*/

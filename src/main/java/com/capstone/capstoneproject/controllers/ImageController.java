@@ -25,6 +25,7 @@ public class ImageController {
     @RequestMapping(value="")
     public String index(Model model) {
         model.addAttribute("images", imageDao.findAll());
+        model.addAttribute("title","Images");
         return "image/index";
     }
 
@@ -36,8 +37,8 @@ public class ImageController {
             e.printStackTrace();
         }
         model.addAttribute("images", imageDao.findAll());
+        model.addAttribute("title","Images");
         return "image/index";
     }
-
 }
 

@@ -13,7 +13,6 @@ public class ListController {
     @Autowired
     DocumentDao documentDao;
 
-    /*loads all saved documents as links. Temporary home page*/
     @RequestMapping(value = "all")
     public String listDocuments(Model model){
         model.addAttribute("documents", documentDao.findAll());

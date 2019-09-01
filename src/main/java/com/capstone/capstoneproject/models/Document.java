@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,14 +17,11 @@ public class Document {
 
     @Column(name = "title")
     @NotEmpty(message = "Please provide a title")
-    @Size(min=6, message = "*Title must be at least 6 characters")
+    @Size(min=6, message = "Title must be at least 6 characters")
     private String title;
 
     @Column(name = "body")
-    @NotEmpty(message = "Please enter information")
-    @Size(min=6, message = "*Document is too short")
     private String body;
-
 
     public Document(){}
 
