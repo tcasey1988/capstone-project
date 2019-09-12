@@ -3,7 +3,7 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body>
+<content>
 <nav th:replace="fragments :: navigation"></nav>
 
 <p th:unless="${images} and ${images.size()}">no images</p>
@@ -22,5 +22,5 @@
 
 <div th:replace="fragments :: scripts"></div>
 
-</body>
+</content>
 </html>

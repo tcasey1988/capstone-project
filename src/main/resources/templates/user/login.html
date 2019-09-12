@@ -3,7 +3,7 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body>
+<content>
 <div>
     <form th:action="@{/login}" method="POST" class="form-class" >
         <h3 th:text="Welcome"></h3>
@@ -21,7 +21,6 @@
         </div>
 
         <button name="Submit" value="Login" type="Submit" th:text="Login"></button>
-        <a href="/registration">Register Account</a>
     </form>
 </div>
 
@@ -29,5 +28,5 @@
 
 <div th:replace="fragments :: scripts"></div>
 
-</body>
+</content>
 </html>

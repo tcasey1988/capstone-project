@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-
 <head th:replace="fragments :: head"></head>
 
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" th:object="${document}" class="form-class">
+<form method="POST" th:object="${document}" class="form-class" action="/document/edit">
     <div class="form-group">
         <label for="title-field">Title</label>
         <br>
         <input id="title-field" type="text" th:field="*{title}" />
         <label th:errors="*{title}" class="error"></label>
+    </div>
 
-        <div class="form-group">
-            <label for="author-field">Author</label>
-            <br>
-            <input id="author-field" type="text" th:field="*{author}" />
-            <label th:errors="*{author}" class="error"></label>
-        </div>
+    <div class="form-group">
+        <label for="author-field">Title</label>
+        <br>
+        <input id="author-field" type="text" th:field="*{author}" />
+        <label th:errors="*{title}" class="error"></label>
+    </div>
+
 
     <div class="form-group">
         <input name="content" type="hidden" th:field="*{content}"/>
-        <div id="editor-container"></div>
+        <div id="editor-container" ></div>
     </div>
 
-    <input type="submit" value="Create" />
+    <input type="hidden" th:value="${document.id}" name="documentId" />
+    <input type="submit" value="Edit" />
 </form>
 
 <footer th:replace="fragments :: footer"></footer>
-
 <div th:replace="fragments :: scripts"></div>
 
 <script>
@@ -40,14 +41,16 @@ var quill = new Quill('#editor-container', {
       ['image']
     ]
   },
-  theme: 'snow'
+  theme: 'snow',
 });
+
+quill.setText('Hello\nWorld!\n');
+
 var form = document.querySelector('form');
 form.onsubmit = function() {
   var about = document.querySelector('input[name=content]');
   about.value = quill.root.innerHTML;
 };
 </script>
-
 </body>
 </html>

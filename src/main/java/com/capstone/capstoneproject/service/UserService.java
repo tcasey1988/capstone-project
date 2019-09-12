@@ -34,7 +34,7 @@ public class UserService {
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
-        Role userRole = roleDao.findByRole("ADMIN");
+        Role userRole = roleDao.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userDao.save(user);
     }

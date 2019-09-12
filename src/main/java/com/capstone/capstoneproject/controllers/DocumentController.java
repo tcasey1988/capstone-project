@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -21,7 +18,6 @@ public class DocumentController {
     @Autowired
     DocumentDao documentDao;
 
-    /*route for loading the form for adding documents and procedures*/
     @RequestMapping(value = "add")
     public String displayAddDocument(Model model){
         model.addAttribute(new Document());
@@ -30,7 +26,7 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddDcoument(Model model, @ModelAttribute @Valid Document document, Errors errors){
+    public String processAddDocument(Model model, @ModelAttribute @Valid Document document, Errors errors){
         if(errors.hasErrors()){
             model.addAttribute(document);
             model.addAttribute("title","Add Procedure");
@@ -42,7 +38,6 @@ public class DocumentController {
         return "redirect:/document/view/" + document.getId();
     }
 
-    /*view a form by clicking a link on the home page*/
     @RequestMapping(value = "view/{documentId}", method = RequestMethod.GET)
     public String viewDocument(Model model, @PathVariable int documentId){
         Optional<Document> optDoc = documentDao.findById(documentId);
@@ -54,4 +49,52 @@ public class DocumentController {
         model.addAttribute("title","View Procedure");
         return "document/view";
     }
+
+    @RequestMapping(value = "edit/{documentId}", method = RequestMethod.GET)
+    public String displayEdit(Model model, @PathVariable int documentId){
+        Optional<Document> optDoc = documentDao.findById(documentId);
+        Document myDocument = new Document();
+        if (optDoc.isPresent()){
+            myDocument = optDoc.get();
+        }
+        model.addAttribute("document", myDocument);
+        model.addAttribute("title","Edit Procedure");
+        return "document/edit";
+    }
+
+    @RequestMapping(value = "edit", method  = RequestMethod.POST)
+    public String editDocument(Model model, int documentId, @RequestParam String title, String content, String author,
+                               @ModelAttribute @Valid Document document, Errors errors){
+
+        if(errors.hasErrors()){
+            model.addAttribute("document",document);
+            model.addAttribute("title","Edit Procedure");
+            return "document/edit/{documentId}";
+        }
+
+        Optional<Document> optDoc = documentDao.findById(documentId);
+        Document editDocument = new Document();
+        if (optDoc.isPresent()){
+            editDocument = optDoc.get();
+        }
+        editDocument.setTitle(title);
+        editDocument.setContent(author);
+        editDocument.setContent(content);
+        documentDao.save(editDocument);
+        return "redirect:/document/view/" + editDocument.getId();
+    }
+
+    @RequestMapping(value = "view/{documentId}", method = RequestMethod.POST)
+    public String deleteDocument(Model model, @PathVariable int documentId){
+        Optional<Document> optDoc = documentDao.findById(documentId);
+        Document myDocument = new Document();
+        if (optDoc.isPresent()){
+            myDocument = optDoc.get();
+        }
+
+        documentDao.delete(myDocument);
+        model.addAttribute("documents", documentDao.findAll());
+        return "list/index";
+    }
+
 }

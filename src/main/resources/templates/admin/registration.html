@@ -4,8 +4,9 @@
 <head th:replace="fragments :: head"></head>
 
 <body>
+<nav th:replace="fragments :: navigation"></nav>
 <div>
-    <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-class">
+    <form autocomplete="off" action="#" th:action="@{admin/registration}" th:object="${user}" method="post" class="form-class">
         <h2>Registration Form</h2>
 
         <div class="form-group">
@@ -30,7 +31,7 @@
 
         <button type="submit">Register User</button>
         <span th:utext="${successMessage}"></span>
-        <a href="/login">User login</a>
+
     </form>
 </div>
 

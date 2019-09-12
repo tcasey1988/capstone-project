@@ -1,12 +1,7 @@
 package com.capstone.capstoneproject.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 public class Document {
@@ -17,11 +12,14 @@ public class Document {
 
     @Column(name = "title")
     @NotEmpty(message = "Please provide a title")
-    @Size(min=6, message = "Title must be at least 6 characters")
     private String title;
 
-    @Column(name = "body")
-    private String body;
+    @Lob
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "author")
+    private String author;
 
     public Document(){}
 
@@ -33,15 +31,23 @@ public class Document {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public String getContent() {
+        return content;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

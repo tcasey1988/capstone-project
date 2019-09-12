@@ -3,10 +3,17 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body>
+<content>
 <nav th:replace="fragments :: navigation"></nav>
 
 <p th:unless="${documents} and ${documents.size()}">no documents</p>
+
+<form th:action="@{/list/search}" method="POST" class="form-class">
+    <div class="form-group">
+        <input type="text" id="searchTerm" name="searchTerm" class="form-control"/>
+        <input type="submit" value="Search" />
+    </div>
+</form>
 
 <div>
     <ul>
@@ -20,5 +27,5 @@
 
 <div th:replace="fragments :: scripts"></div>
 
-</body>
+</content>
 </html>
