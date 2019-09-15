@@ -28,6 +28,7 @@ public class ListController {
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String searchDocuments(Model model, @RequestParam String searchTerm){
+        searchTerm = "%" + searchTerm + "%";
         model.addAttribute("documents", documentDao.findBySearchTerm(searchTerm));
         model.addAttribute("title","All Procedures");
         return "list/index";

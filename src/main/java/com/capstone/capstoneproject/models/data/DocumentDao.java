@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface DocumentDao extends JpaRepository<Document, Integer> {
-    @Query(value = "SELECT * FROM document WHERE CONTAINS (title, 'searchTerm')", nativeQuery = true)
-    Document findBySearchTerm(@Param("searchTerm") String searchTerm);
+    //@Query(value = "SELECT * FROM document WHERE LOWER(title) LIKE LOWER(CONCAT(\"%Test%\"))\n", nativeQuery = true)
+    @Query(value = "SELECT * FROM document WHERE LOWER(title) LIKE LOWER(CONCAT(:searchTerm))\n", nativeQuery = true)
+    List<Document> findBySearchTerm(@Param("searchTerm") String searchTerm);
 }
