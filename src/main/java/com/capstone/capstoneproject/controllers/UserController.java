@@ -1,7 +1,7 @@
 package com.capstone.capstoneproject.controllers;
 import javax.validation.Valid;
 import com.capstone.capstoneproject.models.User;
-import com.capstone.capstoneproject.service.UserService;
+import com.capstone.capstoneproject.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public String login(Model model){
@@ -32,7 +32,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String createNewUser(Model model, @ModelAttribute @Valid User user, BindingResult bindingResult) {
-        User userExists = userService.findUserByEmail(user.getEmail());
+        User userExists = loginService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
@@ -43,7 +43,7 @@ public class UserController {
             model.addAttribute("title","User Registration");
             return "user/registration";
         } else {
-            userService.saveUser(user);
+            loginService.saveUser(user);
             model.addAttribute("successMessage", "User has been registered successfully");
             model.addAttribute("user",user);
             model.addAttribute("title","User Registration");

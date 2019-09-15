@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<content>
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <div>
+        <ul>
+            <li th:each="user : ${users}">
+                <a th:href="'/admin/edit-list/' + ${user.id}" th:text="${user.email}"></a>
+            </li>
+        </ul>
+    </div>
+
+    <footer th:replace="fragments :: footer"></footer>
+
+    <div th:replace="fragments :: scripts"></div>
+
+</content>
+</html>

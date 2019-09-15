@@ -14,15 +14,14 @@
     </div>
 
     <div class="form-group">
-        <label for="author-field">Title</label>
+        <label for="author-field">Author</label>
         <br>
         <input id="author-field" type="text" th:field="*{author}" />
-        <label th:errors="*{title}" class="error"></label>
+        <label th:errors="*{author}" class="error"></label>
     </div>
 
-
     <div class="form-group">
-        <input name="content" type="hidden" th:field="*{content}"/>
+        <input name="content" type="hidden" th:field="*{content}" id="content"/>
         <div id="editor-container" ></div>
     </div>
 
@@ -44,7 +43,8 @@ var quill = new Quill('#editor-container', {
   theme: 'snow',
 });
 
-quill.setText('Hello\nWorld!\n');
+var newStuff = document.getElementById('content');
+quill.root.innerHTML = newStuff.value;
 
 var form = document.querySelector('form');
 form.onsubmit = function() {

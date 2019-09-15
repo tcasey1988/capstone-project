@@ -12,16 +12,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 @Service
-public class UserService {
+public class LoginService {
 
     private UserDao userDao;
     private RoleDao roleDao;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserDao userDao,
-                       RoleDao roleDao,
-                       BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public LoginService(UserDao userDao,
+                        RoleDao roleDao,
+                        BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDao = userDao;
         this.roleDao = roleDao;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
