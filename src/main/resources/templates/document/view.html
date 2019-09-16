@@ -3,18 +3,18 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class>
+<body>
 <nav th:replace="fragments :: navigation"></nav>
 
-<div>
+<div class="form-class">
     <h2 th:text="${document.title}"></h2>
-    <h4 th:text="'Author:' + ${document.author}"></h4>
+    <h5 th:text="'Author:' + ${document.author}"></h5>
+    <a th:href="'/document/edit/' + ${document.id}" th:text="Edit"></a>
     <p th:utext="${document.content}"></p>
 </div>
 
-<a th:href="'/document/edit/' + ${document.id}" th:text="Edit"></a>
 
-<form method="post">
+<form method="post" class="form-class">
     <input name="documentId" type="hidden" th:field="*{document.id}"/>
     <input type="submit" value="Delete"/>
 </form>

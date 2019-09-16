@@ -3,7 +3,7 @@
 
 <head th:replace="fragments :: head"></head>
 
-<content>
+<body>
 <div>
     <form th:action="@{/login}" method="POST" class="form-class" >
         <h3 th:text="Welcome"></h3>
@@ -17,7 +17,7 @@
         </div>
 
         <div align="center" th:if="${param.error}">
-            <p class="error">Email or Password invalid, please verify</p>
+            <p class="error">Email or Password invalid. Please verify your credentials or contact your Admin for support.</p>
         </div>
 
         <button name="Submit" value="Login" type="Submit" th:text="Login"></button>
@@ -28,5 +28,5 @@
 
 <div th:replace="fragments :: scripts"></div>
 
-</content>
+</body>
 </html>

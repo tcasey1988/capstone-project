@@ -5,7 +5,6 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Document {
-
     @Id
     @GeneratedValue
     private int id;

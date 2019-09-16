@@ -14,7 +14,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("document")
 public class DocumentController {
-
     @Autowired
     DocumentDao documentDao;
 
@@ -49,6 +48,18 @@ public class DocumentController {
         model.addAttribute("title","View Procedure");
         return "document/view";
     }
+    @RequestMapping(value = "view/{documentId}", method = RequestMethod.POST)
+    public String deleteDocument(Model model, @PathVariable int documentId){
+        Optional<Document> optDoc = documentDao.findById(documentId);
+        Document myDocument = new Document();
+        if (optDoc.isPresent()){
+            myDocument = optDoc.get();
+        }
+        documentDao.delete(myDocument);
+        model.addAttribute("documents", documentDao.findAll());
+        model.addAttribute("title", "View Procedure");
+        return "list/index";
+    }
 
     @RequestMapping(value = "edit/{documentId}", method = RequestMethod.GET)
     public String displayEdit(Model model, @PathVariable int documentId){
@@ -65,11 +76,10 @@ public class DocumentController {
     @RequestMapping(value = "edit", method  = RequestMethod.POST)
     public String editDocument(Model model, int documentId, @RequestParam String title, String content, String author,
                                @ModelAttribute @Valid Document document, Errors errors){
-
         if(errors.hasErrors()){
             model.addAttribute("document",document);
             model.addAttribute("title","Edit Procedure");
-            return "document/edit/{documentId}";
+            return "document/edit";
         }
 
         Optional<Document> optDoc = documentDao.findById(documentId);
@@ -83,18 +93,4 @@ public class DocumentController {
         documentDao.save(editDocument);
         return "redirect:/document/view/" + editDocument.getId();
     }
-
-    @RequestMapping(value = "view/{documentId}", method = RequestMethod.POST)
-    public String deleteDocument(Model model, @PathVariable int documentId){
-        Optional<Document> optDoc = documentDao.findById(documentId);
-        Document myDocument = new Document();
-        if (optDoc.isPresent()){
-            myDocument = optDoc.get();
-        }
-
-        documentDao.delete(myDocument);
-        model.addAttribute("documents", documentDao.findAll());
-        return "list/index";
-    }
-
 }

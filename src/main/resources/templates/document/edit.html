@@ -43,8 +43,8 @@ var quill = new Quill('#editor-container', {
   theme: 'snow',
 });
 
-var newStuff = document.getElementById('content');
-quill.root.innerHTML = newStuff.value;
+var edit = document.getElementById('content');
+quill.root.innerHTML = edit.value;
 
 var form = document.querySelector('form');
 form.onsubmit = function() {

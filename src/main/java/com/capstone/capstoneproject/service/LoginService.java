@@ -13,7 +13,6 @@ import java.util.HashSet;
 
 @Service
 public class LoginService {
-
     private UserDao userDao;
     private RoleDao roleDao;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -38,5 +37,4 @@ public class LoginService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userDao.save(user);
     }
-
 }

@@ -3,9 +3,9 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: navigation"></nav>
-<form method="post">
+<form method="post" class="form-class">
+    <h4>Delete Users</h4>
     <div th:each="user : ${users}" class="checkbox">
-
         <input type="checkbox" name="userIds" th:value="${user.id}" th:id="${user.id}"/>
         <label th:for="${user.id}" th:text="${user.email}"></label>
         <br />

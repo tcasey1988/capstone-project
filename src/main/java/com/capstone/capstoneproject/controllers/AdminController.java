@@ -16,7 +16,6 @@ import java.util.Optional;
 @Controller
 @RequestMapping("admin")
 public class AdminController {
-
     @Autowired
     LoginService loginService;
 
@@ -41,7 +40,7 @@ public class AdminController {
         if (userExists != null) {
             bindingResult
                     .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+                            "There is already a user with the email provided");
         }
         if (bindingResult.hasErrors()) {
             model.addAttribute("user", user);
@@ -49,15 +48,17 @@ public class AdminController {
             return "admin/registration";
         } else {
             loginService.saveUser(user);
-            model.addAttribute("successMessage", "User has been registered successfully");
+            model.addAttribute("successMessage", "Updated user credentials");
             model.addAttribute("user", user);
             model.addAttribute("title", "User Registration");
             return "admin/registration";
         }
     }
+
     @RequestMapping(value = "edit-list")
     public String listDocuments(Model model) {
         model.addAttribute("users", userDao.findAll());
+        model.addAttribute("title", "Edit Users");
         return "admin/edit-list";
     }
 
@@ -69,6 +70,7 @@ public class AdminController {
             editUser = optUser.get();
         }
         model.addAttribute("user", editUser);
+        model.addAttribute("title", "Edit User");
         return "admin/edit";
     }
 
@@ -85,27 +87,22 @@ public class AdminController {
         editUser.setEmail(email);
         editUser.setPassword(password);
         loginService.saveUser(editUser);
+        model.addAttribute("title", "Edit User");
         return "admin/index";
-
     }
-
 
     @RequestMapping(value = "delete", method = RequestMethod.GET)
     public String showDeleteUserForm(Model model) {
         model.addAttribute("users", userDao.findAll());
+        model.addAttribute("title", "Delete Users");
         return "admin/delete";
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String processDeleteUserForm(@RequestParam int[] userIds) {
-
         for (int userId : userIds) {
             userDao.deleteById(userId);
         }
-
         return "redirect:";
     }
-
-
-
 }

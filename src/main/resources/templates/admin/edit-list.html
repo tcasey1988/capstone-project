@@ -3,10 +3,11 @@
 
 <head th:replace="fragments :: head"></head>
 
-<content>
+<body>
     <nav th:replace="fragments :: navigation"></nav>
 
-    <div>
+    <div class="form-class">
+        <h4>Select User to Edit</h4>
         <ul>
             <li th:each="user : ${users}">
                 <a th:href="'/admin/edit/' + ${user.id}" th:text="${user.email}"></a>
@@ -15,8 +16,7 @@
     </div>
 
     <footer th:replace="fragments :: footer"></footer>
-
     <div th:replace="fragments :: scripts"></div>
 
-</content>
+</body>
 </html>

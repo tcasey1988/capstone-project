@@ -33,6 +33,7 @@
     </div>
     <input type="hidden" th:value="${user.id}" name="userId" />
     <input type="submit" value="Edit User" />
+    <span th:utext="${successMessage}"></span>
 </form>
 
 <footer th:replace="fragments :: footer"></footer>

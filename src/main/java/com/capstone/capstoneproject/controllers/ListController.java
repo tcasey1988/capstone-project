@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("list")
 public class ListController {
-
     @Autowired
     DocumentDao documentDao;
 
@@ -24,9 +23,8 @@ public class ListController {
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String searchDocuments(Model model, @RequestParam String searchTerm){
-        searchTerm = "%" + searchTerm + "%";
         model.addAttribute("documents", documentDao.findBySearchTerm(searchTerm));
-        model.addAttribute("title","All Procedures");
+        model.addAttribute("title","Search Results");
         return "list/index";
     }
 }

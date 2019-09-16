@@ -3,19 +3,22 @@
 
 <head th:replace="fragments :: head"></head>
 
-<content>
+<body>
 <nav th:replace="fragments :: navigation"></nav>
 
 <p th:unless="${documents} and ${documents.size()}">no documents</p>
 
 <form th:action="@{/list/search}" method="POST" class="form-class">
     <div class="form-group">
-        <input type="text" id="searchTerm" name="searchTerm" class="form-control"/>
+        <label for="searchTerm">Search All Procedures</label>
+        <input type="text" id="searchTerm" name="searchTerm" placeholder="Enter Search Term" class="form-control"/>
+        <br/>
         <input type="submit" value="Search" />
     </div>
 </form>
 
-<div>
+<div class="form-class">
+    <h3>Procedures</h3>
     <ul>
         <li th:each="document : ${documents}">
             <a th:href="'/document/view/' + ${document.id}" th:text="${document.title}"></a>
@@ -27,5 +30,5 @@
 
 <div th:replace="fragments :: scripts"></div>
 
-</content>
+</body>
 </html>
