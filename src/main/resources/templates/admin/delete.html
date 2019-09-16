@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 <body>
+<nav th:replace="fragments :: navigation"></nav>
+<form method="post">
+    <div th:each="user : ${users}" class="checkbox">
 
+        <input type="checkbox" name="userIds" th:value="${user.id}" th:id="${user.id}"/>
+        <label th:for="${user.id}" th:text="${user.email}"></label>
+        <br />
+    </div>
+    <input type="submit" value="Delete Users" />
+</form>
+<footer th:replace="fragments :: footer"></footer>
+<div th:replace="fragments :: scripts"></div>
 </body>
 </html>

@@ -78,7 +78,7 @@ public class DocumentController {
             editDocument = optDoc.get();
         }
         editDocument.setTitle(title);
-        editDocument.setContent(author);
+        editDocument.setAuthor(author);
         editDocument.setContent(content);
         documentDao.save(editDocument);
         return "redirect:/document/view/" + editDocument.getId();

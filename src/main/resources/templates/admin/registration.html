@@ -6,7 +6,7 @@
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 <div>
-    <form autocomplete="off" action="#" th:action="@{admin/registration}" th:object="${user}" method="post" class="form-class">
+    <form th:object="${user}" method="post" class="form-class">
         <h2>Registration Form</h2>
 
         <div class="form-group">

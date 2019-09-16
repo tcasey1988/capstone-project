@@ -9,7 +9,7 @@
     <div>
         <ul>
             <li th:each="user : ${users}">
-                <a th:href="'/admin/edit-list/' + ${user.id}" th:text="${user.email}"></a>
+                <a th:href="'/admin/edit/' + ${user.id}" th:text="${user.email}"></a>
             </li>
         </ul>
     </div>

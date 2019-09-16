@@ -19,6 +19,7 @@ public class Document {
     private String content;
 
     @Column(name = "author")
+    @NotEmpty(message = "Please provide an author")
     private String author;
 
     public Document(){}

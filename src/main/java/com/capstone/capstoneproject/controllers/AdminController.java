@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("admin")
@@ -24,14 +24,14 @@ public class AdminController {
     UserDao userDao;
 
     @RequestMapping(value = "")
-    public String index(){
+    public String index() {
         return "admin/index";
     }
 
-    @RequestMapping(value="registration", method = RequestMethod.GET)
-    public String registration(Model model, @ModelAttribute User user){
+    @RequestMapping(value = "registration", method = RequestMethod.GET)
+    public String registration(Model model, @ModelAttribute User user) {
         model.addAttribute("user", user);
-        model.addAttribute("title","User Registration");
+        model.addAttribute("title", "User Registration");
         return "admin/registration";
     }
 
@@ -55,16 +55,57 @@ public class AdminController {
             return "admin/registration";
         }
     }
+    @RequestMapping(value = "edit-list")
+    public String listDocuments(Model model) {
+        model.addAttribute("users", userDao.findAll());
+        return "admin/edit-list";
+    }
+
+    @RequestMapping(value = "edit/{userId}", method = RequestMethod.GET)
+    public String displayUserEdit(Model model, @PathVariable int userId){
+        Optional<User>optUser = userDao.findById(userId);
+        User editUser = new User();
+        if (optUser.isPresent()){
+            editUser = optUser.get();
+        }
+        model.addAttribute("user", editUser);
+        return "admin/edit";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String editUser(Model model, int userId, @RequestParam String name, String lastName, String email,
+                           String password, @ModelAttribute @Valid User user, Errors errors){
+        Optional<User>optUser = userDao.findById(userId);
+        User editUser = new User();
+        if (optUser.isPresent()){
+            editUser = optUser.get();
+        }
+        editUser.setName(name);
+        editUser.setLastName(lastName);
+        editUser.setEmail(email);
+        editUser.setPassword(password);
+        loginService.saveUser(editUser);
+        return "admin/index";
+
+    }
+
 
     @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public String showDeleteUserForm(){
+    public String showDeleteUserForm(Model model) {
+        model.addAttribute("users", userDao.findAll());
         return "admin/delete";
     }
 
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    public String processDeleteUserForm(@RequestParam int[] userIds) {
 
-    @RequestMapping(value = "edit-list")
-    public String listDocuments(Model model){
-        model.addAttribute("users", userDao.findAll());
-        return "list/index";
+        for (int userId : userIds) {
+            userDao.deleteById(userId);
+        }
+
+        return "redirect:";
     }
+
+
+
 }
